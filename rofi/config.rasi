@@ -1,0 +1,113 @@
+configuration {
+    modi:                       "drun,run";
+    show-icons:                 true;
+    display-drun:               "🔍 Buscar";
+    drun-display-format:        "{name}";
+    font:                       "JetBrainsMono Nerd Font 11";
+}
+
+* {
+    background-color:           #1e1e2e;
+    text-color:                 #cdd6f4;
+    prompt-color:               #89b4fa;
+    border-color:               #89b4fa;
+    selected-bg:                #313244;
+}
+
+window {
+    transparency:               "real";
+    location:                   center;
+    anchor:                     center;
+    fullscreen:                 false;
+    width:                      500px;
+    x-offset:                   0px;
+    y-offset:                   0px;
+
+    enabled:                    true;
+    border:                     2px solid;
+    border-radius:              12px;
+    border-color:               @border-color;
+    background-color:           @background-color;
+    cursor:                     "default";
+}
+
+mainbox {
+    enabled:                    true;
+    spacing:                    10px;
+    padding:                    20px;
+    background-color:           transparent;
+    children:                   [ "inputbar", "listview" ];
+}
+
+inputbar {
+    enabled:                    true;
+    spacing:                    10px;
+    padding:                    8px;
+    border-radius:              8px;
+    background-color:           @selected-bg;
+    text-color:                 @text-color;
+    children:                   [ "prompt", "entry" ];
+}
+
+prompt {
+    enabled:                    true;
+    background-color:           transparent;
+    text-color:                 @prompt-color;
+}
+
+entry {
+    enabled:                    true;
+    background-color:           transparent;
+    text-color:                 @text-color;
+    cursor:                     "text";
+    placeholder:                "Escribe para buscar...";
+    placeholder-color:          #6c7086;
+}
+
+listview {
+    enabled:                    true;
+    columns:                    1;
+    lines:                      6;
+    cycle:                      true;
+    dynamic:                    true;
+    scrollbar:                  false;
+    layout:                     vertical;
+    reverse:                    false;
+    fixed-height:               true;
+    fixed-columns:              true;
+    
+    spacing:                    5px;
+    background-color:           transparent;
+    text-color:                 @text-color;
+    cursor:                     "default";
+}
+
+element {
+    enabled:                    true;
+    spacing:                    10px;
+    padding:                    6px;
+    border-radius:              6px;
+    background-color:           transparent;
+    text-color:                 @text-color;
+    cursor:                     "pointer";
+}
+
+element selected.normal {
+    background-color:           @selected-bg;
+    text-color:                 @prompt-color;
+}
+
+element-icon {
+    background-color:           transparent;
+    text-color:                 inherit;
+    size:                       24px;
+    cursor:                     inherit;
+}
+
+element-text {
+    background-color:           transparent;
+    text-color:                 inherit;
+    cursor:                     inherit;
+    vertical-align:             0.5;
+    horizontal-align:           0.0;
+}

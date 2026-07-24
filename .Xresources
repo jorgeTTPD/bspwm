@@ -1,0 +1,53 @@
+! ---- Apariencia: negro + transparente ----
+URxvt.termName: rxvt-unicode-256color
+URxvt.depth: 32
+URxvt.background: [85]#000000
+URxvt.foreground: #d0d0d0
+URxvt.cursorColor: #ffffff
+
+! ---- Fuente ----
+URxvt.font: xft:JetBrainsMono Nerd Font:size=11
+URxvt.letterSpace: 0
+URxvt.lineSpace: 0
+
+! ---- Scrollback ----
+URxvt.saveLines: 10000
+URxvt.scrollBar: false
+URxvt.scrollTtyOutput: false
+URxvt.scrollWithBuffer: true
+URxvt.scrollTtyKeypress: true
+
+! ---- Compatibilidad y copiar/pegar ----
+URxvt.iso14755: false
+URxvt.perl-ext-common: default,clipboard,matcher,resize-font,url-select,keyboard-select
+URxvt.keysym.Control-Shift-V: perl:clipboard:paste
+
+! ---- URLs clickeables (Ctrl+Shift+E) ----
+URxvt.keysym.Control-Shift-E: perl:url-select:select_next
+
+! ---- Atajos de teclado ----
+URxvt.keysym.M-e: perl:keyboard-select:activate
+URxvt.keysym.M-Up: resize-font:smaller
+URxvt.keysym.M-Down: resize-font:larger
+
+! ---- Borde sutil ----
+URxvt.border: 2
+URxvt.borderColor: #6272a4
+
+! ---- Colores Dracula ----
+URxvt.color0:  #000000
+URxvt.color1:  #ff5555
+URxvt.color2:  #50fa7b
+URxvt.color3:  #f1fa8c
+URxvt.color4:  #6272a4
+URxvt.color5:  #ff79c6
+URxvt.color6:  #8be9fd
+URxvt.color7:  #bfbfbf
+URxvt.color8:  #4d4d4d
+URxvt.color9:  #ff6e67
+URxvt.color10: #5af78e
+URxvt.color11: #f4f99d
+URxvt.color12: #caa9fa
+URxvt.color13: #ff92d0
+URxvt.color14: #9aedfe
+URxvt.color15: #e6e6e6
