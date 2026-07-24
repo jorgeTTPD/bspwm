@@ -1,0 +1,76 @@
+# Lanzar terminal
+super + Return
+    urxvtc
+
+# Lanzar rofi
+super + d
+    rofi -show drun
+
+# Cerrar ventana
+super + shift + q
+    bspc node -c
+
+# Salir de la sesión
+super + alt + e
+    bspc quit
+
+# Mover el foco
+super + {Left,Down,Up,Right}
+    bspc node -f {west,south,north,east}
+
+# Mover ventanas a escritorios 1-9
+super + shift + {1-9}
+    bspc node -d {I,II,III,IV,V,VI,VII,VIII,IX}
+
+# Cambiar de escritorio
+super + {1-9}
+    bspc desktop -f {I,II,III,IV,V,VI,VII,VIII,IX}
+
+# Menú principal Rofi
+super + p
+    ~/.config/scripts/menu.sh
+
+# Menú de apagado (adi1090x)
+super + Escape
+    ~/.config/rofi/powermenu/type-1/powermenu.sh
+
+# Captura de pantalla
+Print
+    ~/.config/scripts/screenshot.sh
+
+# Control de música
+super + s
+    ~/.config/scripts/musictl.sh
+
+# Historial del portapapeles (greenclip)
+super + v
+    export PATH="$HOME/.local/bin:$PATH"; greenclip print | rofi -dmenu -p "Clipboard" -i | xargs -r greenclip select
+
+# Teclas multimedia Fn
+XF86AudioPlay
+    playerctl play-pause
+
+XF86AudioNext
+    playerctl next
+
+XF86AudioPrev
+    playerctl previous
+
+XF86AudioRaiseVolume
+    pactl set-sink-volume @DEFAULT_SINK@ +5%
+
+XF86AudioLowerVolume
+    pactl set-sink-volume @DEFAULT_SINK@ -5%
+
+XF86AudioMute
+    pactl set-sink-mute @DEFAULT_SINK@ toggle
+
+XF86MonBrightnessUp
+    brightnessctl set +5%
+
+XF86MonBrightnessDown
+    brightnessctl set 5%-
+
+# Alternar monocle
+super + m
+    bspc desktop -l next
