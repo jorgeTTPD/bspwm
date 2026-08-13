@@ -5,6 +5,12 @@ export PATH="$HOME/.local/bin:$PATH"
 dir="$HOME/Pictures"
 mkdir -p "$dir"
 
+if [ -n "$WAYLAND_DISPLAY" ]; then
+    MODE="wayland"
+else
+    MODE="x11"
+fi
+
 options() {
     select="✂"
     window="☐"
@@ -18,25 +24,52 @@ setFilename() {
     filepath="$dir/$filename"
 }
 
+copy_clipboard() {
+    if [ "$MODE" = "wayland" ]; then
+        wl-copy -t image/png < "$filepath"
+    else
+        xclip -selection clipboard -t image/png < "$filepath"
+    fi
+}
+
 check_case() {
     case $chosen in
         $select)
             setFilename
-            scrot -s "$filepath"
-            xclip -selection clipboard -t image/png < "$filepath" ;;
+            if [ "$MODE" = "wayland" ]; then
+                grim -g "$(slurp -d)" "$filepath"
+            else
+                scrot -s "$filepath"
+            fi
+            ;;
         $window)
             setFilename
-            scrot -u "$filepath"
-            xclip -selection clipboard -t image/png < "$filepath" ;;
+            if [ "$MODE" = "wayland" ]; then
+                geom=$(mmsg get focusing-client | jq -r '"\(.x),\(.y) \(.width)x\(.height)"')
+                grim -g "$geom" "$filepath"
+            else
+                scrot -u "$filepath"
+            fi
+            ;;
         $screen)
             setFilename
-            scrot "$filepath"
-            xclip -selection clipboard -t image/png < "$filepath" ;;
+            if [ "$MODE" = "wayland" ]; then
+                grim "$filepath"
+            else
+                scrot "$filepath"
+            fi
+            ;;
         $delay)
             setFilename
-            scrot -d 5 "$filepath"
-            xclip -selection clipboard -t image/png < "$filepath" ;;
+            if [ "$MODE" = "wayland" ]; then
+                sleep 5
+                grim "$filepath"
+            else
+                scrot -d 5 "$filepath"
+            fi
+            ;;
     esac
+    [ -f "$filepath" ] && copy_clipboard
     notify-send "Screenshot" "Lista para pegar (Ctrl+V)"
 }
 

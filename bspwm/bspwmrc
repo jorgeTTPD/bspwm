@@ -4,6 +4,10 @@
 killall sxhkd
 sxhkd -c ~/.config/sxhkd/sxhkdrc &
 
+# 1.1 Daemon de notificaciones
+killall dunst
+dunst &
+
 # 1.2 Configuración del Touchpad (Tapping + Velocidad)
 # Habilita el clic con toque y ajusta velocidad en todos los dispositivos touchpad detectados
 xinput list | grep -i "touchpad" | cut -d '=' -f 2 | cut -f 1 | while read id; do
@@ -26,34 +30,47 @@ greenclip daemon &
 
 # 2. Iniciar compositor
 killall picom
-picom -b &
+picom --config ~/.config/picom/picom.conf -b &
 
-# 3. Lanzar barra (Polybar) y EWW
-# Polybar ya tiene el botón configurado en tu config.ini
+# 3. Lanzar barra (Polybar)
 ~/.config/polybar/launch.sh &
 
 
 
 # 4. Ajustes de escritorio
 bspc monitor -d I II III IV V
-bspc config border_width         2
+bspc config border_width         0
 bspc config window_gap          10
-bspc config split_ratio          0.52
+bspc config split_ratio          0.50
 bspc config focus_follows_pointer true
+bspc config automatic_scheme    longest_side
+bspc config initial_polarity    second_child
+bspc config borderless_monocle  true
+bspc config gapless_monocle     true
+bspc config top_padding          28
 
+# Opciones adicionales estilo Hyprland
+bspc config border_radius         12
 bspc config pointer_modifier    super
 bspc config pointer_action1     move
 bspc config pointer_action2     resize_side
 bspc config pointer_action3     resize_corner
 
-# Regla para ventana flotante de letras (yad)
+# Reglas de ventanas
+bspc rule -a ffplay state=floating sticky=on focus=off layer=below
 bspc rule -a Yad:yad state=floating sticky=on top=on focus=off rectangle=660+35+600+22
+bspc rule -a Pavucontrol state=floating sticky=on
+bspc rule -a File-roller state=floating
+bspc rule -a Nm-connection-editor state=floating
 
-# 5. Fondo de pantalla
-feh --bg-fill /home/jorge/Imágenes/wallpapers/fondoGaga.jpg &
-redshift &
+# 5. Fondo de pantalla (aleatorio cada 10 min)
+killall xwinwrap ffplay 2>/dev/null
+rm -f /tmp/wallpaper-video.pid
+~/.config/scripts/wallpaper.sh daemon &
+
+# 5.1 Menu contextual jgmenu
 
 # 6. Auto-lock y apagado de pantalla tras 7 min
 xset s 420 420
 xset dpms 420 420 420
-xss-lock -- i3lock -e -f -c 1a1a2e -i ~/Imágenes/wallpapers/gaga.jpeg &
+xss-lock -- betterlockscreen -l -e -f &

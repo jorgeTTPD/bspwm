@@ -1,17 +1,19 @@
 configuration {
     modi:                       "drun,run";
     show-icons:                 true;
+    icon-theme:                 "Papirus";
     display-drun:               "🔍 Buscar";
     drun-display-format:        "{name}";
     font:                       "JetBrainsMono Nerd Font 11";
 }
 
 * {
-    background-color:           #1e1e2e;
+    background-color:           #1e1e2e73;
     text-color:                 #cdd6f4;
     prompt-color:               #89b4fa;
     border-color:               #89b4fa;
-    selected-bg:                #313244;
+    selected-bg:                #313244b3;
+    highlight:                  #89b4fa;
 }
 
 window {
@@ -73,10 +75,10 @@ listview {
     scrollbar:                  false;
     layout:                     vertical;
     reverse:                    false;
-    fixed-height:               true;
+    fixed-height:               false;
     fixed-columns:              true;
     
-    spacing:                    5px;
+    spacing:                    10px;
     background-color:           transparent;
     text-color:                 @text-color;
     cursor:                     "default";
@@ -84,9 +86,10 @@ listview {
 
 element {
     enabled:                    true;
-    spacing:                    10px;
-    padding:                    6px;
-    border-radius:              6px;
+    spacing:                    12px;
+    padding:                    10px 12px;
+    margin:                     2px 0px;
+    border-radius:              8px;
     background-color:           transparent;
     text-color:                 @text-color;
     cursor:                     "pointer";
@@ -110,4 +113,5 @@ element-text {
     cursor:                     inherit;
     vertical-align:             0.5;
     horizontal-align:           0.0;
+    padding:                    2px 4px;
 }

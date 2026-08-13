@@ -1,43 +1,48 @@
-# My Dotfiles
+# my bspwm dotfiles
 
-Backup de mi entorno de escritorio para recuperar mi config si Arch se rompe.
+Configuración de mi escritorio **bspwm + polybar + sxhkd + rofi + picom**.
+Clónalo, ejecuta el instalador y tendrás el mismo entorno en Arch Linux.
 
-## Entornos
+![bspwm](screenshot.png)
 
-### bspwm (X11)
+## Requisitos (Arch Linux)
+
 ```bash
-cp -r bspwm/* ~/.config/
-cp -r polybar/* ~/.config/polybar/
-cp -r scripts/* ~/.config/scripts/
-cp -r rofi/* ~/.config/rofi/
-cp .Xresources ~/
-cp .fehbg ~/
-cp picom.conf ~/
-cp greenclip.toml ~/.config/
-cp libinput-gestures.conf ~/.config/
+sudo pacman -S bspwm sxhkd polybar picom feh rofi xclip scrot \
+    xss-lock i3lock playerctl brightnessctl greenclip \
+    libinput-gestures xdotool jgmenu dunst
 ```
 
-### Hyprland (Wayland)
+## Instalación
+
 ```bash
-cp hyprland/* ~/.config/hypr/
-cp waybar/* ~/.config/waybar/
-cp wofi/* ~/.config/wofi/
-cp mako/* ~/.config/mako/
+git clone https://github.com/jorgeTTPD/bspwm
+cd bspwm
+./install.sh
 ```
 
-## Paquetes necesarios
+El instalador copia las carpetas (`bspwm/`, `polybar/`, `sxhkd/`, `picom/`,
+`rofi/`, `scripts/`) a `~/.config/` y los dotfiles (`.Xresources`,
+`.fehbg`, `greenclip.toml`, `libinput-gestures.conf`) a sus rutas.
 
-### bspwm
-```bash
-sudo pacman -S bspwm sxhkd polybar picom feh rofi xclip scrot brightnessctl playerctl greenclip
+Después configura tus wallpapers en `~/.fehbg` (usa `$HOME`) y reinicia:
+`bspc restart`.
+
+## Estructura
+
 ```
-
-### Hyprland
-```bash
-sudo pacman -S hyprland hyprpaper waybar wofi mako grim slurp brightnessctl playerctl
+bspwm/        # bspwmrc y powermenu
+polybar/      # barras (config.ini, config-soundbar.ini) y scripts
+sxhkd/        # atajos de teclado
+picom/        # compositor
+rofi/         # menús y lanzadores
+scripts/      # helpers: wallpaper, cheatsheet, screenshot, volumen…
+.Xresources   # temas de terminal (urxvt)
+.fehbg        # fondos de pantalla (plantilla con $HOME)
 ```
 
 ## Colores
+
 Catppuccin Mocha:
 - Fondo: `#1e1e2e`
 - Texto: `#cdd6f4`

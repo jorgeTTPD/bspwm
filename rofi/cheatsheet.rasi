@@ -1,0 +1,88 @@
+configuration {
+    show-icons: false;
+    font: "JetBrainsMono Nerd Font 12";
+}
+
+* {
+    background-color:           #1e1e2e;
+    text-color:                 #cdd6f4;
+    prompt-color:               #a6e3a1;
+    selected-bg:                #313244;
+}
+
+window {
+    transparency:               "real";
+    location:                   center;
+    anchor:                     center;
+    width:                      600px;
+    border:                     2px solid;
+    border-color:               #a6e3a1;
+    border-radius:              16px;
+    background-color:           @background-color;
+}
+
+mainbox {
+    enabled:                    true;
+    spacing:                    5px;
+    padding:                    15px;
+    background-color:           transparent;
+    children:                   [ "inputbar", "listview" ];
+}
+
+inputbar {
+    enabled:                    true;
+    padding:                    8px;
+    border-radius:              8px;
+    background-color:           @selected-bg;
+    text-color:                 @text-color;
+    children:                   [ "prompt", "entry" ];
+}
+
+prompt {
+    enabled:                    true;
+    background-color:           transparent;
+    text-color:                 @prompt-color;
+}
+
+entry {
+    enabled:                    true;
+    background-color:           transparent;
+    text-color:                 @text-color;
+    cursor:                     "text";
+    placeholder:                "Buscar atajo...";
+    placeholder-color:          #6c7086;
+}
+
+listview {
+    enabled:                    true;
+    columns:                    1;
+    lines:                      15;
+    cycle:                      true;
+    dynamic:                    true;
+    scrollbar:                  false;
+    layout:                     vertical;
+    spacing:                    2px;
+    background-color:           transparent;
+}
+
+element {
+    enabled:                    true;
+    padding:                    4px 8px;
+    border-radius:              4px;
+    background-color:           transparent;
+    text-color:                 #cdd6f4;
+    cursor:                     "pointer";
+}
+
+element selected.normal {
+    background-color:           @selected-bg;
+    text-color:                 #a6e3a1;
+}
+
+element-text {
+    background-color:           transparent;
+    text-color:                 inherit;
+    cursor:                     inherit;
+    vertical-align:             0.5;
+    horizontal-align:           0.0;
+}

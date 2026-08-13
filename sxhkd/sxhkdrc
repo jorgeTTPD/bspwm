@@ -10,10 +10,6 @@ super + d
 super + shift + q
     bspc node -c
 
-# Salir de la sesión
-super + alt + e
-    bspc quit
-
 # Mover el foco
 super + {Left,Down,Up,Right}
     bspc node -f {west,south,north,east}
@@ -74,3 +70,33 @@ XF86MonBrightnessDown
 # Alternar monocle
 super + m
     bspc desktop -l next
+
+# Pantalla completa (preserva el árbol binario)
+super + f
+    bspc node -t ~fullscreen
+
+# === OTROS ===
+
+# Cheat sheet de keybindings
+super + shift + c
+    ~/.config/scripts/cheatsheet.sh
+
+# Menu contextual jgmenu
+super + shift + t
+    ~/.config/jgmenu/jgmenu-menu.sh
+
+# Spofi: control de Spotify en rofi (carátula, cola, playlists)
+super + t
+    spofi
+
+# Cambiar wallpaper aleatorio (estático o animado)
+super + w
+    ~/.config/scripts/wallpaper.sh next
+
+# Toggle fondo animado on/off
+super + e
+    ~/.config/scripts/wallpaper.sh toggle
+
+# Bloquear pantalla con betterlockscreen
+super + l
+    betterlockscreen -l

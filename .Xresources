@@ -1,9 +1,9 @@
-! ---- Apariencia: negro + transparente ----
+! ---- Apariencia: transparente + Catppuccin Mocha ----
 URxvt.termName: rxvt-unicode-256color
 URxvt.depth: 32
-URxvt.background: [85]#000000
-URxvt.foreground: #d0d0d0
-URxvt.cursorColor: #ffffff
+URxvt.background: [5]#1e1e2e
+URxvt.foreground: #cdd6f4
+URxvt.cursorColor: #f5e0dc
 
 ! ---- Fuente ----
 URxvt.font: xft:JetBrainsMono Nerd Font:size=11
@@ -30,24 +30,23 @@ URxvt.keysym.M-e: perl:keyboard-select:activate
 URxvt.keysym.M-Up: resize-font:smaller
 URxvt.keysym.M-Down: resize-font:larger
 
-! ---- Borde sutil ----
-URxvt.border: 2
-URxvt.borderColor: #6272a4
+! ---- Borde ultra delgado ----
+URxvt.border: 0
 
-! ---- Colores Dracula ----
-URxvt.color0:  #000000
-URxvt.color1:  #ff5555
-URxvt.color2:  #50fa7b
-URxvt.color3:  #f1fa8c
-URxvt.color4:  #6272a4
-URxvt.color5:  #ff79c6
-URxvt.color6:  #8be9fd
-URxvt.color7:  #bfbfbf
-URxvt.color8:  #4d4d4d
-URxvt.color9:  #ff6e67
-URxvt.color10: #5af78e
-URxvt.color11: #f4f99d
-URxvt.color12: #caa9fa
-URxvt.color13: #ff92d0
-URxvt.color14: #9aedfe
-URxvt.color15: #e6e6e6
+! ---- Colores Catppuccin Mocha ----
+URxvt.color0:  #45475a
+URxvt.color1:  #f38ba8
+URxvt.color2:  #a6e3a1
+URxvt.color3:  #f9e2af
+URxvt.color4:  #89b4fa
+URxvt.color5:  #f5c2e7
+URxvt.color6:  #94e2d5
+URxvt.color7:  #bac2de
+URxvt.color8:  #585b70
+URxvt.color9:  #f38ba8
+URxvt.color10: #a6e3a1
+URxvt.color11: #f9e2af
+URxvt.color12: #89b4fa
+URxvt.color13: #f5c2e7
+URxvt.color14: #94e2d5
+URxvt.color15: #a6adc8

@@ -10,7 +10,7 @@ fi
 
 # Iniciar CAVA en segundo plano si no está corriendo
 if ! pgrep -x "cava" > /dev/null; then
-    cava -p ~/.config/cava/config > "$FIFO" 2>&1 &
+    cava -p ~/.config/cava/config-polybar > "$FIFO" 2>&1 &
 fi
 
 # Leer el FIFO

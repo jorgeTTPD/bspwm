@@ -2,7 +2,7 @@
 
 /*****----- Main Box -----*****/
 coverbox {
-    border-radius:		0px;
+    border-radius:		16px;
     padding		: 0px;
     spacing		: 0px;
 }
@@ -34,5 +34,10 @@ textbox {
 
 /*****----- Elements -----*****/
 element-text {
-    font:                        "feather 25";
+    font:                        "JetBrainsMono Nerd Font 15";
+    vertical-align:              0.5;
+}
+
+element-icon {
+    size:                        1.2em;
 }
