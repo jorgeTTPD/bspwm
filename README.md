@@ -1,7 +1,7 @@
 # my bspwm dotfiles
 
 Configuración de mi escritorio **bspwm + polybar + sxhkd + rofi + picom**.
-Clónalo, ejecuta el instalador y tendrás el mismo entorno en Arch Linux.
+Respaldo Arch bspw.
 
 ![bspwm](screenshot.png)
 
