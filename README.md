@@ -3,7 +3,7 @@
 Configuración de mi escritorio **bspwm + polybar + sxhkd + rofi + picom**.
 Respaldo Arch bspw.
 
-![bspwm](screenshot.png)
+
 
 ## Requisitos (Arch Linux)
 
