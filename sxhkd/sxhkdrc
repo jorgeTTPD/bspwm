@@ -6,6 +6,26 @@ super + Return
 super + d
     rofi -show drun
 
+# Flashpoint estatico (foto + cita)
+super + y
+    pkill -x rofi || ~/.config/rofi/flashpoint/show.sh
+
+# Reproductor local (~/Music)
+super + p
+    pkill -x rofi || ~/.config/rofi/localplayer/launch.sh -show localplayer -modes "localplayer:$HOME/.config/rofi/localplayer/localplayer.sh" -show-icons -theme "$HOME/.config/rofi/localplayer/localplayer.rasi"
+
+# Reproductor (now playing, MPRIS)
+super + o
+    pkill -x rofi || ~/.config/rofi/nowplaying/nowplaying.sh
+
+# Letras karaoke (rofi, panel derecho)
+super + i
+    pkill -x rofi || ~/.config/rofi/lyrics/launch.sh -show lyrics -modes "lyrics:$HOME/.config/rofi/lyrics/lyrics.sh" -theme "$HOME/.config/rofi/lyrics/lyrics.rasi"
+
+# Letras sincronizadas (overlay karaoke)
+super + 6
+    ~/.config/lyrics-overlay/launch.sh
+
 # Cerrar ventana
 super + shift + q
     bspc node -c
@@ -14,17 +34,13 @@ super + shift + q
 super + {Left,Down,Up,Right}
     bspc node -f {west,south,north,east}
 
-# Mover ventanas a escritorios 1-9
-super + shift + {1-9}
-    bspc node -d {I,II,III,IV,V,VI,VII,VIII,IX}
+# Mover ventanas a escritorios 1-5
+super + shift + {1-5}
+    bspc node -d {I,II,III,IV,V}
 
 # Cambiar de escritorio
-super + {1-9}
-    bspc desktop -f {I,II,III,IV,V,VI,VII,VIII,IX}
-
-# Menú principal Rofi
-super + p
-    ~/.config/scripts/menu.sh
+super + {1-5}
+    bspc desktop -f {I,II,III,IV,V}
 
 # Menú de apagado (adi1090x)
 super + Escape
@@ -34,23 +50,19 @@ super + Escape
 Print
     ~/.config/scripts/screenshot.sh
 
-# Control de música
-super + s
-    ~/.config/scripts/musictl.sh
-
 # Historial del portapapeles (greenclip)
 super + v
     export PATH="$HOME/.local/bin:$PATH"; greenclip print | rofi -dmenu -p "Clipboard" -i | xargs -r greenclip select
 
-# Teclas multimedia Fn
+# Teclas multimedia Fn (next de cmus va directo: su MPRIS no avanza)
 XF86AudioPlay
     playerctl play-pause
 
 XF86AudioNext
-    playerctl next
+    sh -c 'if [ "$(playerctl -p cmus status 2>/dev/null)" = "Playing" ]; then cmus-remote --server "$HOME/.cache/localplayer/cmus.sock" -n 2>/dev/null || cmus-remote -n; else playerctl next; fi'
 
 XF86AudioPrev
-    playerctl previous
+    sh -c 'if [ "$(playerctl -p cmus status 2>/dev/null)" = "Playing" ]; then cmus-remote --server "$HOME/.cache/localplayer/cmus.sock" -r 2>/dev/null || cmus-remote -r; else playerctl previous; fi'
 
 XF86AudioRaiseVolume
     pactl set-sink-volume @DEFAULT_SINK@ +5%
@@ -77,25 +89,33 @@ super + f
 
 # === OTROS ===
 
+# Menú de audio (salidas / micro / apps / puente Meet)
+super + x
+    pkill -x rofi || ~/.config/scripts/audiomenu.sh
+
+# Menú de sistema (actualizar / limpiar / grabar pantalla)
+super + s
+    pkill -x rofi || ~/.config/scripts/sysmenu.sh
+
 # Cheat sheet de keybindings
 super + shift + c
     ~/.config/scripts/cheatsheet.sh
-
-# Menu contextual jgmenu
-super + shift + t
-    ~/.config/jgmenu/jgmenu-menu.sh
-
-# Spofi: control de Spotify en rofi (carátula, cola, playlists)
-super + t
-    spofi
 
 # Cambiar wallpaper aleatorio (estático o animado)
 super + w
     ~/.config/scripts/wallpaper.sh next
 
-# Toggle fondo animado on/off
+# Gestor de fondos con preview (tira flotante 7)
 super + e
-    ~/.config/scripts/wallpaper.sh toggle
+    pkill -x rofi || ~/.config/scripts/wallpaper-select.sh
+
+# Overview de escritorios con miniaturas
+super + Tab
+    pkill -x rofi || ~/.config/scripts/desktop-overview.sh
+
+# Menú de agentes IA (abre su TUI en terminal)
+super + a
+    pkill -x rofi || ~/.config/scripts/agents.sh
 
 # Bloquear pantalla con betterlockscreen
 super + l

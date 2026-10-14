@@ -1,0 +1,15 @@
+# secrets
+rofi/lyrics/.genius.token
+# runtime-generated (nowplaying art + title cache)
+rofi/nowplaying/album_art.png
+rofi/nowplaying/song_title.cache
+# file-manager metadata
+**/.comments/
+# python / editor noise
+__pycache__/
+*.pyc
+*.swp
+*~
+# localplayer runtime (if ever synced here)
+rofi/localplayer/*.tsv
+rofi/localplayer/*.m3u

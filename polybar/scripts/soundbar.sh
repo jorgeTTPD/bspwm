@@ -1,45 +1,52 @@
 #!/usr/bin/env bash
-
-# Definir la ruta
+set -u
 FIFO="/tmp/soundbar.fifo"
-PIDFILE="/tmp/soundbar.pid"
+LOCK="/tmp/soundbar.lock"
+BIN="/home/jorge/.cargo/bin/soundbar"
+ERRLOG="/tmp/soundbar-errors.log"
 
-# Asegurar que el FIFO exista y esté limpio
-if [ ! -p "$FIFO" ]; then
-    mkfifo "$FIFO"
-fi
+exec 9>"$LOCK"
+flock 9 || exit 0
 
-# Comprobar si soundbar ya está corriendo (via PID file + cmdline)
-soundbar_running() {
-    local pid
-    [ -f "$PIDFILE" ] || return 1
-    pid="$(cat "$PIDFILE" 2>/dev/null)"
-    [ -n "$pid" ] || return 1
-    [ -d "/proc/$pid" ] || return 1
-    tr '\0' ' ' < "/proc/$pid/cmdline" 2>/dev/null | grep -q "soundbar" || return 1
-    return 0
+rm -f /tmp/soundbar.pid
+
+[ -p "$FIFO" ] || { rm -f "$FIFO"; mkfifo "$FIFO"; }
+
+writer_pid() {
+    pgrep -f "^$BIN --bars 8$" 2>/dev/null | head -n 1
 }
 
-# Iniciar soundbar en segundo plano si no está corriendo
-if ! soundbar_running; then
-    rm -f "$PIDFILE"
-    $HOME/.cargo/bin/soundbar --bars 8 > "$FIFO" 2>&1 &
-    echo $! > "$PIDFILE"
-fi
+start_writer() {
+    pkill -f "^$BIN --bars 8$" 2>/dev/null
+    sleep 0.2
+    "$BIN" --bars 8 > "$FIFO" 2>>"$ERRLOG" &
+}
 
-# Leer el FIFO
-# Usamos un bucle para mantener la conexión abierta
-while read -r line < "$FIFO"; do
-    # Mapeo de caracteres
+render() {
     bars=" ▂▃▄▅▆▇█"
     output=""
-    IFS=';' read -ra values <<< "$line"
+    IFS=';' read -ra values <<< "$1"
     for v in "${values[@]}"; do
-        if [ "$v" -ge 0 ] && [ "$v" -le 7 ]; then
+        if [ "$v" -ge 0 ] 2>/dev/null && [ "$v" -le 7 ] 2>/dev/null; then
             output+="${bars:$v:1}"
         else
             output+=" "
         fi
     done
-    echo "$output"
+    printf '%s\n' "$output"
+}
+
+while true; do
+    [ -n "$(writer_pid)" ] || start_writer
+    exec 8<"$FIFO"
+    while true; do
+        if read -r -t 5 -u 8 line; then
+            render "$line"
+        elif [ -n "$(writer_pid)" ]; then
+            continue
+        else
+            break
+        fi
+    done
+    exec 8<&-
 done

@@ -16,6 +16,18 @@ configuration {
 @import                          "shared/colors.rasi"
 @import                          "shared/fonts.rasi"
 
+/*****----- Paleta estilo nowplaying (sobrescribe onedark) -----*****/
+* {
+    background:     #1e1e2e0D;
+    background-alt: #000000CC;
+    foreground:     #cdd6f4FF;
+    selected:       #89b4faFF;
+    urgent:         #f38ba8FF;
+    border:         #3a3a3aCC;
+    dark:           #1e1e2eFF;
+    font:           "JetBrainsMono Nerd Font 12";
+}
+
 /*****----- Main Window -----*****/
 window {
     /* properties for window widget */
@@ -31,11 +43,11 @@ window {
     enabled:                     true;
     margin:                      0px;
     padding:                     0px;
-    border:                      0px solid;
-    border-radius:               12px;
-    border-color:                @selected;
+    border:                      1px solid;
+    border-radius:               10px;
+    border-color:                @border;
     cursor:                      "default";
-    background-color:            #1E2127A6;
+    background-color:            @background;
 }
 
 /*****----- Main Box -----*****/
@@ -71,15 +83,15 @@ textbox-prompt-colon {
     str:                         "";
     padding:                     10px 14px;
     border-radius:               10px;
-    background-color:            @urgent;
-    text-color:                  @background;
+    background-color:            @selected;
+    text-color:                  @dark;
 }
 prompt {
     enabled:                     true;
     padding:                     10px;
-    border-radius:               10px;
-    background-color:            @active;
-    text-color:                  @background;
+    border-radius:              10px;
+    background-color:            @background-alt;
+    text-color:                  @foreground;
 }
 
 /*****----- Message -----*****/
@@ -157,5 +169,10 @@ element-text {
 }
 element selected.normal {
     background-color:            var(selected);
-    text-color:                  var(background);
+    text-color:                  var(dark);
+}
+
+element alternate.normal {
+    background-color:            transparent;
+    text-color:                  var(foreground);
 }

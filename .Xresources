@@ -19,8 +19,9 @@ URxvt.scrollTtyKeypress: true
 
 ! ---- Compatibilidad y copiar/pegar ----
 URxvt.iso14755: false
-URxvt.perl-ext-common: default,clipboard,matcher,resize-font,url-select,keyboard-select
-URxvt.keysym.Control-Shift-V: perl:clipboard:paste
+URxvt.perl-ext-common: default,-confirm-paste,matcher,selection-to-clipboard,eval
+URxvt.keysym.Control-Shift-V: eval:paste_clipboard
+URxvt.keysym.Control-Alt-v: builtin:
 
 ! ---- URLs clickeables (Ctrl+Shift+E) ----
 URxvt.keysym.Control-Shift-E: perl:url-select:select_next

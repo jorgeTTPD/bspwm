@@ -1,19 +1,25 @@
 configuration {
-    modi:                       "drun,run";
+    modi:                       "drun,run,window,ssh,combi";
+    combi-modes:                "window,drun,ssh,run";
     show-icons:                 true;
     icon-theme:                 "Papirus";
     display-drun:               "🔍 Buscar";
+    display-window:             "🪟 Ventanas";
+    display-run:                "⌨ Ejecutar";
+    display-ssh:                "🔌 SSH";
+    display-combi:              "🔍 Buscar";
     drun-display-format:        "{name}";
-    font:                       "JetBrainsMono Nerd Font 11";
+    font:                       "JetBrainsMono Nerd Font 12";
 }
 
 * {
-    background-color:           #1e1e2e73;
-    text-color:                 #cdd6f4;
-    prompt-color:               #89b4fa;
-    border-color:               #89b4fa;
-    selected-bg:                #313244b3;
-    highlight:                  #89b4fa;
+    background:     #1e1e2e0D;
+    background-alt: #000000CC;
+    foreground:     #cdd6f4FF;
+    selected:       #89b4faFF;
+    border:         #3a3a3aCC;
+    dark:           #1e1e2eFF;
+    muted:          #6c7086FF;
 }
 
 window {
@@ -26,17 +32,17 @@ window {
     y-offset:                   0px;
 
     enabled:                    true;
-    border:                     2px solid;
-    border-radius:              12px;
-    border-color:               @border-color;
-    background-color:           @background-color;
+    border:                     1px solid;
+    border-radius:              10px;
+    border-color:               @border;
+    background-color:           @background;
     cursor:                     "default";
 }
 
 mainbox {
     enabled:                    true;
     spacing:                    10px;
-    padding:                    20px;
+    padding:                    16px;
     background-color:           transparent;
     children:                   [ "inputbar", "listview" ];
 }
@@ -44,26 +50,28 @@ mainbox {
 inputbar {
     enabled:                    true;
     spacing:                    10px;
-    padding:                    8px;
-    border-radius:              8px;
-    background-color:           @selected-bg;
-    text-color:                 @text-color;
+    padding:                    8px 12px;
+    border-radius:              10px;
+    background-color:           @background-alt;
+    text-color:                 @foreground;
     children:                   [ "prompt", "entry" ];
 }
 
 prompt {
     enabled:                    true;
     background-color:           transparent;
-    text-color:                 @prompt-color;
+    text-color:                 @selected;
+    font:                       "JetBrainsMono Nerd Font Bold 12";
 }
 
 entry {
     enabled:                    true;
     background-color:           transparent;
-    text-color:                 @text-color;
+    text-color:                 @foreground;
     cursor:                     "text";
     placeholder:                "Escribe para buscar...";
-    placeholder-color:          #6c7086;
+    placeholder-color:          @muted;
+    font:                       "JetBrainsMono Nerd Font 12";
 }
 
 listview {
@@ -77,10 +85,10 @@ listview {
     reverse:                    false;
     fixed-height:               false;
     fixed-columns:              true;
-    
+
     spacing:                    10px;
     background-color:           transparent;
-    text-color:                 @text-color;
+    text-color:                 @foreground;
     cursor:                     "default";
 }
 
@@ -89,15 +97,20 @@ element {
     spacing:                    12px;
     padding:                    10px 12px;
     margin:                     2px 0px;
-    border-radius:              8px;
+    border-radius:              10px;
     background-color:           transparent;
-    text-color:                 @text-color;
+    text-color:                 @foreground;
     cursor:                     "pointer";
 }
 
 element selected.normal {
-    background-color:           @selected-bg;
-    text-color:                 @prompt-color;
+    background-color:           @selected;
+    text-color:                 @dark;
+}
+
+element alternate.normal {
+    background-color:           transparent;
+    text-color:                 @foreground;
 }
 
 element-icon {
@@ -114,4 +127,5 @@ element-text {
     vertical-align:             0.5;
     horizontal-align:           0.0;
     padding:                    2px 4px;
+    font:                       "JetBrainsMono Nerd Font 12";
 }

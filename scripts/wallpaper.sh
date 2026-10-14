@@ -3,9 +3,12 @@
 WALLPAPER_DIR="$HOME/Imágenes/FondoPantalla"
 VIDEO_DIR="$HOME/Vídeos/FondoAnimado"
 PID_FILE="/tmp/wallpaper-video.pid"
+STATE_FILE="$HOME/.cache/current-wallpaper"
 
 random_wallpaper() {
-    feh --bg-fill --randomize "$WALLPAPER_DIR"/*
+    wall="$(find "$WALLPAPER_DIR" -type f \( -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.png' -o -iname '*.webp' \) 2>/dev/null | shuf -n 1)"
+    [ -n "${wall:-}" ] || return 1
+    feh --bg-fill "$wall" && echo "$wall" > "$STATE_FILE"
 }
 
 video_running() {
